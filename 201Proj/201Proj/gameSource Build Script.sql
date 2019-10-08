@@ -47,7 +47,7 @@ GO
 -- INSERTS
 /*** Games Insert(building the entries in the table) ***/
 INSERT INTO Games(pic, title, genre, releaseDate, developer, console, rating) VALUES 
-('sexy.png', 'Super Mario Bros', 'Plumbing', 1985, 'Nintendo', 'NES', 9.9),
+('superbro1.jpg', 'Super Mario Bros', 'Plumbing', 1985, 'Nintendo', 'NES', 9.9),
 ('plumbing.jpg', 'Super Mario Bros 2', 'Plumbing', 1987, 'Nintendo', 'NES', 9.0),
 ('toilet.jpg','Super Mario Bros 3', 'Plumbing', 1989, 'Nintendo', 'NES', 8.4),
 ('reet.png','Super Smash Bros', 'Wrestling', 1995, 'Nintendo', 'GameCube', 9.9),
@@ -82,7 +82,7 @@ game rating (by major groups), comments ***/
 
 /*** Procedure: getGameByTitle ***/
 CREATE PROCEDURE getGameByTitle
-	@title	VARCHAR
+	@title	VARCHAR(30)
 
 AS
 	SELECT * FROM Games
@@ -103,6 +103,28 @@ AS
 	ORDER BY title
 GO
 
+--pic, title, genre, releaseDate, developer, console, rating
+CREATE PROCEDURE addGame
+	@pic			VARCHAR(30),
+	@title			VARCHAR(30),
+	@genre			VARCHAR(30),
+	@releaseDate	INT,
+	@developer		VARCHAR(30),
+	@console		VARCHAR(30),
+	@rating			FLOAT
+AS
+	INSERT INTO Games(pic, title, genre, releaseDate, developer, console, rating) VALUES
+	(@pic, @title, @genre, @releaseDate, @developer, @console, @rating)
+GO
+
+CREATE PROCEDURE deleteGame
+	@gameId			INT
+AS
+	DELETE FROM Games
+	WHERE gameId = @gameId
+GO
+
+
 --ForeignKey references
 
 -- GameId refrence
@@ -120,3 +142,8 @@ FOREIGN KEY (userId)
 REFERENCES Users (userId)
 ON UPDATE CASCADE
 GO
+
+-- if we want to see current table
+-- select * from Games
+-- select * from comments
+-- select * from Users
