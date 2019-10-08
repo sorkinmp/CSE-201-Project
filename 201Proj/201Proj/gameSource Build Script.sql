@@ -47,7 +47,7 @@ GO
 -- INSERTS
 /*** Games Insert(building the entries in the table) ***/
 INSERT INTO Games(pic, title, genre, releaseDate, developer, console, rating) VALUES 
-('superbro1.jpg', 'Super Mario Bros', 'Plumbing', 1985, 'Nintendo', 'NES', 9.9),
+('superbro1.jpg', 'Super Mario Bros', 'Action', 1985, 'Nintendo', 'NES', 9.9),
 ('plumbing.jpg', 'Super Mario Bros 2', 'Plumbing', 1987, 'Nintendo', 'NES', 9.0),
 ('toilet.jpg','Super Mario Bros 3', 'Plumbing', 1989, 'Nintendo', 'NES', 8.4),
 ('reet.png','Super Smash Bros', 'Wrestling', 1995, 'Nintendo', 'GameCube', 9.9),
