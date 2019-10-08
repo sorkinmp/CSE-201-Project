@@ -144,6 +144,7 @@ ON UPDATE CASCADE
 GO
 
 -- if we want to see current table
+-- DON'T USE VIEW DATA
 -- select * from Games
--- select * from comments
+-- select * from Comments
 -- select * from Users
