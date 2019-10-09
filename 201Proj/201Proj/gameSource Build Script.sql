@@ -148,3 +148,15 @@ GO
 -- select * from Games
 -- select * from Comments
 -- select * from Users
+
+-- SELECT pic FROM Games;
+-- SELECT title FROM Games;
+-- SELECT genre FROM Games;
+-- SELECT releaseDate FROM Games;
+-- SELECT developer FROM Games;
+-- SELECT console FROM Games;
+-- SELECT rating FROM Games;
+-- SELECT * FROM Comments WHERE gameID='1';
+-- SELECT * FROM Comments WHERE userId='1';
+-- SELECT * From Comments WHERE comment LIKE 'worst%';
+
