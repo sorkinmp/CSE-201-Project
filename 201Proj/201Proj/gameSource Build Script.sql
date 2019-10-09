@@ -56,8 +56,8 @@ INSERT INTO Games(pic, title, genre, releaseDate, developer, console, rating) VA
 ('plumbing2.jpg','Super Hoes', 'Sisterhood', 2005, 'Nintendo', 'Xbox 360', 2.9),
 ('plumbing3.jpg','Super Bros', 'Frat', 2006, 'Fratendo', 'Xbox 360', 9.9),
 ('plumbing4.jpg','Mario', 'Mystery', 2007, 'Nintendo', 'Playstation 1', 4.2),
-('marvUltAll3.jpg','Marvel Ultimate Alliance 3: The Black Order', 'Murder', 2010, 'Nintendo', 'Playstation 3', 9.9),
-('pokeSwordShield.jpg','Pokemon Sword and Shield', 'Role-playing game', 2019, 'Nintendo', 'Nintendo Switch', 9.0)
+('marvUltAll3.jpg','Marvel Ultimate Alliance 3: The Black Order', 'Action role-playing', 2019, 'Nintendo', 'Nintendo Switch', 7.8),
+('pokeSwordShield.jpg','Pokemon Sword and Shield', 'Role-playing', 2019, 'Nintendo', 'Nintendo Switch', 9.0)
 GO
 
 /***  Users Insert ***/
