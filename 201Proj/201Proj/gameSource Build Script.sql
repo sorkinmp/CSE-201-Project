@@ -15,12 +15,12 @@ GO
 /*** Games table ***/
 CREATE TABLE Games (
 	gameId		INT			PRIMARY KEY IDENTITY,
-	pic			VARCHAR(30)	NOT NULL,
-	title		VARCHAR(30) NOT NULL,
-	genre		VARCHAR(30) NOT NULL,
+	pic			VARCHAR(50)	NOT NULL,
+	title		VARCHAR(50) NOT NULL,
+	genre		VARCHAR(50) NOT NULL,
 	releaseDate	INT			NOT NULL,
-	developer	VARCHAR(30) NOT NULL,
-	console		VARCHAR(30) NOT NULL,
+	developer	VARCHAR(50) NOT NULL,
+	console		VARCHAR(50) NOT NULL,
 	rating		FLOAT		NOT NULL
 )
 GO
@@ -28,7 +28,7 @@ GO
 /*** Users Table ***/
 CREATE TABLE Users (
 	userId		INT				PRIMARY KEY IDENTITY,
-	email		VARCHAR(30)		NOT NULL,
+	email		VARCHAR(50)		NOT NULL,
 	passwd		VARCHAR(255)	NOT NULL,
 	-- 0 is non-admin and 1 is admin
 	admin		BIT				NOT NULL
@@ -40,7 +40,7 @@ CREATE TABLE Comments (
 	commentId	INT				PRIMARY KEY IDENTITY,
 	gameId		INT				NOT NULL,
 	userId		INT				NOT NULL,
-	comment		VARCHAR(30)		NOT NULL	
+	comment		VARCHAR(50)		NOT NULL	
 )
 GO
 
@@ -56,8 +56,8 @@ INSERT INTO Games(pic, title, genre, releaseDate, developer, console, rating) VA
 ('plumbing2.jpg','Super Hoes', 'Sisterhood', 2005, 'Nintendo', 'Xbox 360', 2.9),
 ('plumbing3.jpg','Super Bros', 'Frat', 2006, 'Fratendo', 'Xbox 360', 9.9),
 ('plumbing4.jpg','Mario', 'Mystery', 2007, 'Nintendo', 'Playstation 1', 4.2),
-('plumbing5.jpg','Luigi', 'Murder', 2010, 'Nintendo', 'Playstation 3', 9.9),
-('plumbing6.jpg','Peach Fights Back', 'Woke', 2015, 'Nintendo', 'Playstation 3.5', 0)
+('marvUltAll3.jpg','Marvel Ultimate Alliance 3: The Black Order', 'Murder', 2010, 'Nintendo', 'Playstation 3', 9.9),
+('pokeSwordShield.jpg','Pokemon Sword and Shield', 'Role-playing game', 2019, 'Nintendo', 'Nintendo Switch', 9.0)
 GO
 
 /***  Users Insert ***/
