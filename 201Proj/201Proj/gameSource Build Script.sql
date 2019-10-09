@@ -47,11 +47,11 @@ GO
 -- INSERTS
 /*** Games Insert(building the entries in the table) ***/
 INSERT INTO Games(pic, title, genre, releaseDate, developer, console, rating) VALUES 
-('superbro1.jpg', 'Super Mario Bros', 'Action', 1985, 'Nintendo', 'NES', 9.9),
-('plumbing.jpg', 'Super Mario Bros 2', 'Plumbing', 1987, 'Nintendo', 'NES', 9.0),
-('toilet.jpg','Super Mario Bros 3', 'Plumbing', 1989, 'Nintendo', 'NES', 8.4),
-('reet.png','Super Smash Bros', 'Wrestling', 1995, 'Nintendo', 'GameCube', 9.9),
-('pikachu.jpg','Pokemon Bros: Melee', 'Friendship', 1999, 'Nintendo', 'Xbox', 6.9),
+('MarioBros.jpg', 'Mario Bros', 'Platforming', 1983, 'Nintendo', 'NES', 7.5),
+('KirbyDreamLand.jpg', 'Kirbys Dream Land', 'Action, platformer', 1992, 'Nintendo', 'GBA', 9.5),
+('PokemonXY.jpg','PokemonX/Y', 'Role-playing', 2013, 'Nintendo', '3DS', 9.9),
+('TheLegendOfZelda.jpg','The Legend Of Zelda: Breath of the Wild', 'Action-adventure', 2017, 'Nintendo', 'Switch', 9.6),
+('lol.jpg','League of Legends', 'MOBA', 2009, 'Riot Games', 'PC', 10),
 ('yellow.png','Banana Bros', 'Plumbing', 1985, 'Nintendo', 'NES', 9),
 ('plumbing2.jpg','Super Hoes', 'Sisterhood', 2005, 'Nintendo', 'Xbox 360', 2.9),
 ('plumbing3.jpg','Super Bros', 'Frat', 2006, 'Fratendo', 'Xbox 360', 9.9),
