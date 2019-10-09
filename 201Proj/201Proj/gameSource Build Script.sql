@@ -156,6 +156,6 @@ GO
 -- SELECT developer FROM Games;
 -- SELECT console FROM Games;
 -- SELECT rating FROM Games;
--- SELECT gameId FROM Comments WHERE gameID='1';
--- SELECT gameId FROM Comments WHERE userId='1';
+-- SELECT * FROM Comments WHERE gameID='1';
+-- SELECT * FROM Comments WHERE userId='1';
 -- SELECT * From Comments WHERE comment LIKE 'worst%';
