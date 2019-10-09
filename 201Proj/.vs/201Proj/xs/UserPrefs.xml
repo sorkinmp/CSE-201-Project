@@ -1,0 +1,25 @@
+﻿<Properties StartupConfiguration="{FC363187-3AA2-4048-AD98-8946EAE5417B}|">
+  <MonoDevelop.Ide.ItemProperties.201Proj PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="201Proj/gameSource Build Script.sql">
+    <Files>
+      <File FileName="201Proj/gameSource Build Script.sql" Line="151" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="201Proj" expanded="True">
+            <Node name="201Proj" expanded="True">
+              <Node name="gameSource Build Script.sql" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
