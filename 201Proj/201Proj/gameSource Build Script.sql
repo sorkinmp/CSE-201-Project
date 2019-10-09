@@ -145,9 +145,9 @@ GO
 
 -- if we want to see current table
 -- DON'T USE VIEW DATA
--- select * from Games
--- select * from Comments
--- select * from Users
+-- SELECT * from Games
+-- SELECT * from Comments
+-- SELECT * from Users
 -- Tests
 -- SELECT pic FROM Games;
 -- SELECT title FROM Games;
