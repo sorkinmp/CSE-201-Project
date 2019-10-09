@@ -126,7 +126,8 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="images\supmarbro1.jpg" />
+    <Content Include="images\marvUltAll3.jpg" />
+    <Content Include="images\pokeSwordShield.jpg" />
     <Content Include="index.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
