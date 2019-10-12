@@ -55,7 +55,7 @@ INSERT INTO Games(pic, title, genre, releaseDate, developer, console, rating) VA
 ('yellow.png','Banana Bros', 'Plumbing', 1985, 'Nintendo', 'NES', 9), --change
 ('plumbing2.jpg','Super Hoes', 'Sisterhood', 2005, 'Nintendo', 'Xbox 360', 2.9), --change
 ('plumbing3.jpg','Super Bros', 'Frat', 2006, 'Fratendo', 'Xbox 360', 9.9), --change
-('plumbing4.jpg','Mario', 'Mystery', 2007, 'Nintendo', 'Playstation 1', 4.2), --change
+('letsgoPika.jpg','Pokemon: Lets Go, Pickachu!', 'Action role-playing', 2018, 'Nintendo', 'Nintendo Switch', 9.3), --change
 ('marvUltAll3.jpg','Marvel Ultimate Alliance 3: The Black Order', 'Action role-playing', 2019, 'Nintendo', 'Nintendo Switch', 7.8),
 ('pokeSwordShield.jpg','Pokemon Sword and Shield', 'Role-playing', 2019, 'Nintendo', 'Nintendo Switch', 9.0)
 GO
@@ -159,3 +159,7 @@ GO
 -- SELECT * FROM Comments WHERE gameID='1';
 -- SELECT * FROM Comments WHERE userId='1';
 -- SELECT * From Comments WHERE comment LIKE 'worst%';
+
+--exec sp_configure 'clr enabled', 1;
+--reconfigure
+--go
