@@ -49,13 +49,13 @@ GO
 INSERT INTO Games(pic, title, genre, releaseDate, developer, console, rating) VALUES 
 ('MarioBros.jpg', 'Mario Bros', 'Platforming', 1983, 'Nintendo', 'NES', 7.5),
 ('KirbyDreamLand.jpg', 'Kirbys Dream Land', 'Action, platformer', 1992, 'Nintendo', 'GBA', 9.5),
-('PokemonXY.jpg','PokemonX/Y', 'Role-playing', 2013, 'Nintendo', '3DS', 9.9),
-('TheLegendOfZelda.jpg','The Legend Of Zelda: Breath of the Wild', 'Action-adventure', 2017, 'Nintendo', 'Switch', 9.6),
 ('lol.jpg','League of Legends', 'MOBA', 2009, 'Riot Games', 'PC', 10),
-('yellow.png','Banana Bros', 'Plumbing', 1985, 'Nintendo', 'NES', 9), --change
-('plumbing2.jpg','Super Hoes', 'Sisterhood', 2005, 'Nintendo', 'Xbox 360', 2.9), --change
-('plumbing3.jpg','Super Bros', 'Frat', 2006, 'Fratendo', 'Xbox 360', 9.9), --change
-('letsgoPika.jpg','Pokemon: Lets Go, Pickachu!', 'Action role-playing', 2018, 'Nintendo', 'Nintendo Switch', 9.3), --change
+('animalCross.jpg','Animal Crossing: New Leaf', 'Social Simulation Game', 2012, 'Nintendo', 'Nintendo 3DS', 9.6),
+('PokemonXY.jpg','PokemonX/Y', 'Role-playing', 2013, 'Nintendo', '3DS', 9.9),
+('shovKnight.jpg','Shovel Knight', 'Platform Game', 2014, 'Nintendo', 'Nintendo 3DS', 9.8),
+('splatoon.jpg','Splatoon', 'Third-person shooter', 2015, 'Nintendo', 'Wii U', 9.3),
+('TheLegendOfZelda.jpg','The Legend Of Zelda: Breath of the Wild', 'Action-adventure', 2017, 'Nintendo', 'Switch', 9.6),
+('letsgoPika.jpg','Pokemon: Lets Go, Pickachu!', 'Action role-playing', 2018, 'Nintendo', 'Nintendo Switch', 9.3),
 ('marvUltAll3.jpg','Marvel Ultimate Alliance 3: The Black Order', 'Action role-playing', 2019, 'Nintendo', 'Nintendo Switch', 7.8),
 ('pokeSwordShield.jpg','Pokemon Sword and Shield', 'Role-playing', 2019, 'Nintendo', 'Nintendo Switch', 9.0)
 GO
