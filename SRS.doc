@@ -3,3 +3,15 @@ Ying Wang
 Hongxi He
 Shiyue Ma
 Alex Chirokov
+
+Requirements:
+1. User log in
+2. Database store games with titles, genres, title, genre, release date, developer, consoles available on, game rating (by major groups), comments
+3. User comment
+4. User add games
+5. Admin moderate comments
+6. Search bar, with sort functionality
+7. Admin approve requests, with comments
+8. Admin can edit information on games
+9. Website
+10. User has a list of favorite games
