@@ -126,11 +126,15 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="images\animalCross.jpg" />
     <Content Include="images\KirbyDreamLand.jpg" />
+    <Content Include="images\letsgoPika.jpg" />
     <Content Include="images\lol.jpg" />
     <Content Include="images\marvUltAll3.jpg" />
     <Content Include="images\PokemonXY.jpg" />
     <Content Include="images\pokeSwordShield.jpg" />
+    <Content Include="images\shovKnight.jpg" />
+    <Content Include="images\splatoon.jpg" />
     <Content Include="images\supmarbro1.jpg" />
     <Content Include="images\TheLegendOfZelda.jpg" />
     <Content Include="index.html" />
