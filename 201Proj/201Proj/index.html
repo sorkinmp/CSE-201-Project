@@ -132,8 +132,42 @@
     <div class="search bar">
         <form>
             <input type="text" placeholder="search...">
-            <button type="submit"></button>
+            <button type="submit" id="submit"></button>
         </form>
     </div>
+    <div id=" database">
+        <table>
+            <tr>
+                <td colspan="2">
+                    <ul id="ulList" class=" list-group"></ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var ulList = $("#ulList");
+
+            ajax("getAllGames", function (data) {
+                $.each(data, function (index, value) {
+                    ulList.append('<li class ="list-group-item">' +
+                        value.title + '</li>')
+                });
+
+
+            });
+
+            function ajax(method, fn) {
+                $.ajax({
+                    type: 'GET',
+                    url: 'api.asmx/' + method,
+                    success: fn
+                });
+        };
+
+
+        });
+    </script>
 </body>
 </html>
