@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--Import JQERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!--Bootstrap and Bootstrap JS-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="import" href="includes/head.html">
     <title>FinDr Application</title>
     <style>
         * {
@@ -135,28 +141,39 @@
             <button type="submit" id="submit"></button>
         </form>
     </div>
-    <div id=" database">
-        <table>
-            <tr>
-                <td colspan="2">
-                    <ul id="ulList" class=" list-group"></ul>
-                </td>
-            </tr>
+    <div id="database">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <!--pic, title, genre, releaseDate, developer, console, rating (comments?)-->
+                    <th scope="col">Game Picture</th>
+                    <th scope="col">Game Title</th>
+                    <th scope="col">Genre</th>
+                    <th scope="col">Release Date</th>
+                    <th scope="col">Developer</th>
+                    <th scope="col">Example Console</th>
+                    <th scope="col">Rating</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+            </tbody>
         </table>
     </div>
 
     <script type="text/javascript">
         $(document).ready(function () {
-            var ulList = $("#ulList");
-
-            ajax("getAllGames", function (data) {
-                $.each(data, function (index, value) {
-                    ulList.append('<li class ="list-group-item">' +
-                        value.title + '</li>')
+            service("getAllGames", "{}", (response) => {
+                let tableBody = "";
+                $.each(response, (index, value) => {
+                    
+                    console.log(response); 
                 });
-
-
-            });
+                $("#tableBody").html(tableBody);
+            }, (response) => {
+                alert("Error...");
+                console.log(response);
+            }
+            );
 
             function ajax(method, fn) {
                 $.ajax({
@@ -164,7 +181,7 @@
                     url: 'api.asmx/' + method,
                     success: fn
                 });
-        };
+            };
 
 
         });

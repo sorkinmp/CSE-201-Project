@@ -138,6 +138,7 @@
     <Content Include="images\splatoon.jpg" />
     <Content Include="images\supmarbro1.jpg" />
     <Content Include="images\TheLegendOfZelda.jpg" />
+    <Content Include="includes\head.html" />
     <Content Include="index.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
