@@ -1,11 +1,200 @@
-﻿<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
-    <h1>Findr</h1>
+    <!--Import JQERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!--Bootstrap and Bootstrap JS-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="import" href="includes/head.html">
+    <title>FinDr Application</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
+        body {
+            margin: 0;
+            padding: 0;
+            background: #FFFFFF;
+            font-weight: 500;
+        }
+
+        #container {
+            width: 500px;
+            height: 820px;
+            margin: 0 auto;
+        }
+
+        div.search {
+            padding: 30px 0;
+        }
+
+        form {
+            position: relative;
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        input, button {
+            border: none;
+            outline: none;
+        }
+
+        input {
+            width: 100%;
+            height: 42px;
+            padding-left: 13px;
+        }
+
+        button {
+            height: 42px;
+            width: 42px;
+            cursor: pointer;
+            position: absolute;
+        }
+
+
+        /*search Bar*/
+        .search {
+            background: #ffffff;
+        }
+
+            .search form {
+                height: 42px;
+            }
+
+            .search input {
+                width: 300px;
+                border-radius: 42px;
+                border: 2px solid #324B4E;
+                background: #F9F0DA;
+                transition: .3s linear;
+                float: right;
+            }
+
+                .search input:focus {
+                    width: 300px;
+                }
+
+            .search button {
+                background: none;
+                top: -2px;
+                right: 0;
+            }
+
+                .search button:before {
+                    content: "\f002";
+                    font-family: FontAwesome;
+                    color: #324b4e;
+                }
+
+        /*center*/
+        .center {
+            height: 300px;
+            position: relative;
+        }
+
+            .center p {
+                margin: 0;
+                position: absolute;
+                top: 80%;
+                left: 50%;
+                -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+                font-size: 3.5em;
+                color: rgb(0, 128, 255);
+            }
+
+        .topnav {
+            overflow: hidden;
+            background-color: #e9e9e9;
+        }
+
+            .topnav a {
+                float: right;
+                display: block;
+                color: black;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 17px;
+            }
+
+            .tableData{
+                text-align: left;
+                width: 100px;
+                height: 100px;
+            }
+    </style>
+</head>
+
+<body>
+    <div class="topnav">
+        <a href="login.html">Login</a>
+        <a href="signUp.html">Sign Up</a>
+        <a class="active" href="index.html">Home</a>
+
+    </div>
+
+    <div class="center">
+        <p>FinDr</p>
+    </div>
+
+    <div class="search bar">
+        <form>
+            <input type="text" placeholder="search...">
+            <button type="submit" id="submit"></button>
+        </form>
+    </div>
+    <div id="database">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <!--pic, title, genre, releaseDate, developer, console, rating (comments?)-->
+                    <th scope="col">Game Picture</th>
+                    <th scope="col">Game Title</th>
+                    <th scope="col">Genre</th>
+                    <th scope="col">Release Date</th>
+                    <th scope="col">Developer</th>
+                    <th scope="col">Example Console</th>
+                    <th scope="col">Rating</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+            </tbody>
+        </table>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            service("getAllGames", "{}", (response) => {
+                let tableBody = "";
+                $.each(response, (index, value) => {
+                    tableBody += "<tr><td style= 'width:200px'>" + "<img src= 'images/" + value.pic + "' alt= 'Game Image'" 
+                        + "width=200px; height=200px;>" + "</td>" + "<td class= tableData>" + value.title + "</td>" +
+                        "<td class= tableData>" + value.genre + "<td class= tableData>" + value.releaseDate + "</td>" +
+                        "<td class= tableData>" + value.developer + "</td>" +
+                        "<td class= tableData>" + value.console + "</td>" +
+                        "<td class=tableData>" + value.rating + "</td></tr>";
+                });
+                $("#tableBody").html(tableBody);
+            }, (response) => {
+                alert("Error...");
+                console.log(response);
+            }
+            );
+
+            function ajax(method, fn) {
+                $.ajax({
+                    type: 'GET',
+                    url: 'api.asmx/' + method,
+                    success: fn
+                });
+            };
+
+
+        });
+    </script>
 </body>
 </html>
