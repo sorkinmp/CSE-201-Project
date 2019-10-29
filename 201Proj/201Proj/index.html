@@ -120,6 +120,12 @@
                 text-decoration: none;
                 font-size: 17px;
             }
+
+            .tableData{
+                text-align: left;
+                width: 100px;
+                height: 100px;
+            }
     </style>
 </head>
 
@@ -165,8 +171,12 @@
             service("getAllGames", "{}", (response) => {
                 let tableBody = "";
                 $.each(response, (index, value) => {
-                    
-                    console.log(response); 
+                    tableBody += "<tr><td style= 'width:200px'>" + "<img src= 'images/" + value.pic + "' alt= 'Game Image'" 
+                        + "width=200px; height=200px;>" + "</td>" + "<td class= tableData>" + value.title + "</td>" +
+                        "<td class= tableData>" + value.genre + "<td class= tableData>" + value.releaseDate + "</td>" +
+                        "<td class= tableData>" + value.developer + "</td>" +
+                        "<td class= tableData>" + value.console + "</td>" +
+                        "<td class=tableData>" + value.rating + "</td></tr>";
                 });
                 $("#tableBody").html(tableBody);
             }, (response) => {
