@@ -121,11 +121,11 @@
                 font-size: 17px;
             }
 
-            .tableData{
-                text-align: left;
-                width: 100px;
-                height: 100px;
-            }
+        .tableData {
+            text-align: left;
+            width: 100px;
+            height: 100px;
+        }
     </style>
 </head>
 
@@ -142,9 +142,9 @@
     </div>
 
     <div class="search bar">
-        <form action="result.html" method="get">
-            <input type="text" placeholder="search...">
-            <button type="submit" id="submit" onchange="search()"></button>
+        <form id="form" action="result.html" method="get">
+            <input type="text" placeholder="search..." id="search">
+            <button type="submit" id="submit"></button>
         </form>
     </div>
     <div id="database">
@@ -171,7 +171,7 @@
             service("getAllGames", "{}", (response) => {
                 let tableBody = "";
                 $.each(response, (index, value) => {
-                    tableBody += "<tr><td style= 'width:200px'>" + "<img src= 'images/" + value.pic + "' alt= 'Game Image'" 
+                    tableBody += "<tr><td style= 'width:200px'>" + "<img src= 'images/" + value.pic + "' alt= 'Game Image'"
                         + "width=200px; height=200px;>" + "</td>" + "<td class= tableData>" + value.title + "</td>" +
                         "<td class= tableData>" + value.genre + "<td class= tableData>" + value.releaseDate + "</td>" +
                         "<td class= tableData>" + value.developer + "</td>" +
@@ -185,6 +185,11 @@
             }
             );
 
+            $("#form").submit((event) => {
+                event.preventDefault();
+                search();
+            });
+
             function ajax(method, fn) {
                 $.ajax({
                     type: 'GET',
@@ -196,32 +201,43 @@
         // write tests here
 
         function CountRows() {
-        var totalRowCount = 0;
-        var rowCount = 0;
-        var table = document.getElementById("tableBody");
-        var rows = table.getElementsByTagName("tr")
-        for (var i = 0; i < rows.length; i++) {
-            totalRowCount++;
-            if (rows[i].getElementsByTagName("td").length > 0) {
-                rowCount++;
+            var totalRowCount = 0;
+            var rowCount = 0;
+            var table = document.getElementById("tableBody");
+            var rows = table.getElementsByTagName("tr")
+            for (var i = 0; i < rows.length; i++) {
+                totalRowCount++;
+                if (rows[i].getElementsByTagName("td").length > 0) {
+                    rowCount++;
+                }
             }
-        }
-        var message = "Total Row Count: " + totalRowCount;
-        message += "\nRow Count: " + rowCount;
-        alert(message);
+            var message = "Total Row Count: " + totalRowCount;
+            message += "\nRow Count: " + rowCount;
+            alert(message);
         }
 
         // run countRows
         setTimeout(CountRows, 5000);
-
-        function test() {
-            
-        }
         // searchBar function
         function search() {
             // get data from searchbar
-            var data = document.getElementById("submit").value;
-
+            var data = document.getElementById("search").value;
+            service("getGameByTitle", "{}", (response) => {
+                let tableBody = "";
+                $.each(response, (index, value) => {
+                    tableBody += "<tr><td style= 'width:200px'>" + "<img src= 'images/" + value.pic + "' alt= 'Game Image'"
+                        + "width=200px; height=200px;>" + "</td>" + "<td class= tableData>" + value.title + "</td>" +
+                        "<td class= tableData>" + value.genre + "<td class= tableData>" + value.releaseDate + "</td>" +
+                        "<td class= tableData>" + value.developer + "</td>" +
+                        "<td class= tableData>" + value.console + "</td>" +
+                        "<td class=tableData>" + value.rating + "</td></tr>";
+                });
+                $("#tableBody").html(tableBody);
+            }, (response) => {
+                alert("Error...");
+                console.log(response);
+            }
+            );
         }
 
     </script>

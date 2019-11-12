@@ -142,11 +142,23 @@
     <div class="center">
         <p>FinDr</p>
 
-        <div class="search bar">
-            <form>
-                <input type="text" placeholder="search...">
-                <button type="submit" id="submit"></button>
-            </form>
+        <div class="result">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <!--pic, title, genre, releaseDate, developer, console, rating (comments?)-->
+                        <th scope="col">Game Picture</th>
+                        <th scope="col">Game Title</th>
+                        <th scope="col">Genre</th>
+                        <th scope="col">Release Date</th>
+                        <th scope="col">Developer</th>
+                        <th scope="col">Example Console</th>
+                        <th scope="col">Rating</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                </tbody>
+            </table>
         </div>
 
     </div>
