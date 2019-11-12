@@ -180,7 +180,7 @@
                 });
                 $("#tableBody").html(tableBody);
             }, (response) => {
-                alert("Error...");
+                alert("Error on getAllGames");
                 console.log(response);
             }
             );
@@ -222,7 +222,7 @@
         function search() {
             // get data from searchbar
             var data = document.getElementById("search").value;
-            service("getGameByTitle", "{}", (response) => {
+            service("getGameByTitle", `{data: '${data}'}`, (response) => {
                 let tableBody = "";
                 $.each(response, (index, value) => {
                     tableBody += "<tr><td style= 'width:200px'>" + "<img src= 'images/" + value.pic + "' alt= 'Game Image'"
@@ -234,7 +234,7 @@
                 });
                 $("#tableBody").html(tableBody);
             }, (response) => {
-                alert("Error...");
+                alert("Error on getGameByTitle");
                 console.log(response);
             }
             );
