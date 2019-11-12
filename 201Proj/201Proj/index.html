@@ -142,9 +142,9 @@
     </div>
 
     <div class="search bar">
-        <form>
+        <form action="result.html" method="get">
             <input type="text" placeholder="search...">
-            <button type="submit" id="submit"></button>
+            <button type="submit" id="submit" onchange="search()"></button>
         </form>
     </div>
     <div id="database">
@@ -217,6 +217,13 @@
         function test() {
             
         }
+        // searchBar function
+        function search() {
+            // get data from searchbar
+            var data = document.getElementById("submit").value;
+
+        }
+
     </script>
 </body>
 </html>

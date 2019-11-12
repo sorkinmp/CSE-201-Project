@@ -697,6 +697,12 @@ namespace StahrDBAPI {
             send("getAllGames", serializeStyle.DATA_TABLE);
         }
 
+        [WebMethod]
+        public void getGameByTitle(string data)
+        {
+            addParam("@title", data);
+            send("getGameByTitle", serializeStyle.DATA_TABLE);
+        }
 		#endregion
 
 	}

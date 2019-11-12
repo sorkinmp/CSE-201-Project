@@ -86,7 +86,7 @@ CREATE PROCEDURE getGameByTitle
 
 AS
 	SELECT * FROM Games
-	WHERE title LIKE @title
+	WHERE title LIKE '%' + @title  + '%'
 	ORDER BY title
 GO
 
