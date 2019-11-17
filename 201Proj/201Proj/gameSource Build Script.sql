@@ -124,6 +124,14 @@ AS
 	WHERE gameId = @gameId
 GO
 
+/**need to get the user and check if user in table, and if password and user match**/
+CREATE PROCEDURE getUser
+	@email VARCHAR(50),
+	@passwd VARCHAR(50)
+AS
+	SELECT * FROM Users
+	WHERE email = @email AND passwd = @passwd
+GO
 
 --ForeignKey references
 
