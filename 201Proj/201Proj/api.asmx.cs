@@ -703,6 +703,22 @@ namespace StahrDBAPI {
             addParam("@title", data);
             send("getGameByTitle", serializeStyle.DATA_TABLE);
         }
+
+        [WebMethod]
+        public void getUser(string email, string passwd)
+        {
+            addParam("@email", email);
+            addParam("@passwd", passwd);
+            send("getUser", serializeStyle.DATA_TABLE);
+        }
+
+        [WebMethod]
+        public void addUser(string email, string passwd)
+        {
+            addParam("@email", email);
+            addParam("@passwd", passwd);
+            send("addUser", serializeStyle.DATA_TABLE);
+        }
 		#endregion
 
 	}

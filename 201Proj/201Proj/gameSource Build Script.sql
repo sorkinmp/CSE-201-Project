@@ -63,7 +63,7 @@ GO
 /***  Users Insert ***/
 INSERT INTO Users(email, passwd, admin) VALUES
 ('bigBrother@gmail.com', '1984', 1),
-('litleBrother@gmail.com', '1990s', 0)
+('littleBrother@gmail.com', '1990s', 0)
 GO
 
 /*** Comments Insert ***/
@@ -130,7 +130,16 @@ CREATE PROCEDURE getUser
 	@passwd VARCHAR(50)
 AS
 	SELECT * FROM Users
-	WHERE email = @email AND passwd = @passwd
+	WHERE email =  @email  AND passwd = @passwd
+GO
+
+-- Need to add user
+CREATE PROCEDURE addUser
+	@email VARCHAR(50),
+	@passwd VARCHAR(50)
+AS
+	INSERT INTO Users(email, passwd) VALUES
+	(@email, @passwd)
 GO
 
 --ForeignKey references
@@ -171,3 +180,5 @@ GO
 --exec sp_configure 'clr enabled', 1;
 --reconfigure
 --go
+
+EXEC getUser 'littleBrother@gmail.com', '1990s'

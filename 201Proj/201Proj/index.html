@@ -197,7 +197,24 @@
                     success: fn
                 });
             };
+            // need function to check url parameters
+            // call in document.ready?
+            var email = getUrlVars()["email"];
+            console.log("email: " + email);
         }); // end document.ready
+        // function to optain url paremeters
+        // either just have ?email=blah or ?email=blah&admin=true
+        function getUrlVars() {
+            var vars = {};
+            var parts = window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+                function (m, key, value) {
+                    vars[key] = value;
+                });
+            return vars;
+        }
+
+
+
         // write tests here
 
         function CountRows() {
@@ -238,12 +255,9 @@
                 console.log(response);
             }
             );
-        }
-
+        } // end search() function
 
     </script>
-
-   <div onclick="window.open('result.html');">result</div>
 
 
 </body>
