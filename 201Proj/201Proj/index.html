@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link rel="import" href="includes/head.html">
+    <link rel="import" href="includes/indexJS.js">
     <title>FinDr Application</title>
     <style>
         * {
@@ -131,10 +132,9 @@
 
 <body>
     <div class="topnav">
-        <a href="login.html">Login</a>
-        <a href="signUp.html">Sign Up</a>
-        <a class="active" href="index.html">Home</a>
-
+        <a href='login.html'>Login</a>
+        <a href='signUp.html'>Sign Up</a>
+        <a class='active' href='index.html'>Home</a>
     </div>
 
     <div class="center">
@@ -197,24 +197,8 @@
                     success: fn
                 });
             };
-            // need function to check url parameters
-            // call in document.ready?
-            var email = getUrlVars()["email"];
-            console.log("email: " + email);
         }); // end document.ready
-        // function to optain url paremeters
-        // either just have ?email=blah or ?email=blah&admin=true
-        function getUrlVars() {
-            var vars = {};
-            var parts = window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,
-                function (m, key, value) {
-                    vars[key] = value;
-                });
-            return vars;
-        }
-
-
-
+        console.log("Email: " + getUrlVars()["email"]);
         // write tests here
 
         function CountRows() {
@@ -230,10 +214,11 @@
             }
             var message = "Total Row Count: " + totalRowCount;
             message += "\nRow Count: " + rowCount;
+            // $("#message").html(message);
             alert(message);
         }
 
-        // run countRows
+        // run countRows every 5 seconds
         setTimeout(CountRows, 5000);
         // searchBar function
         function search() {
