@@ -2,7 +2,8 @@
 // <a href="login.html">Login</a>
 // <a href="signUp.html">Sign Up</a>
 // <a class="active" href="index.html">Home</a>
-$(document).ready(() => {
+// $(document).ready(() => {
+function checkParam() {
     // check if there is an email and admin in the url
     var email = getUrlParam('email', 'null');
     var admin = getUrlParam('admin', 'false');
@@ -24,10 +25,9 @@ $(document).ready(() => {
         var account = "<a href='Account.html'>Account Page</a>";
         var logout = "<a href='index.html'>Logout</a>";
         $(".topnav").html(home2 + account + logout);
-
     }
-
-}); // end document.ready
+}
+// }); // end document.ready
 
 
 // the following functions were found at: https://html-online.com/articles/get-url-parameters-javascript/
