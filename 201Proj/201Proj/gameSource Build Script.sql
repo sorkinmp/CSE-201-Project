@@ -136,10 +136,11 @@ GO
 -- Need to add user
 CREATE PROCEDURE addUser
 	@email VARCHAR(50),
-	@passwd VARCHAR(50)
+	@passwd VARCHAR(50),
+	@admin BIT
 AS
-	INSERT INTO Users(email, passwd) VALUES
-	(@email, @passwd)
+	INSERT INTO Users(email, passwd, admin) VALUES
+	(@email, @passwd, @admin)
 GO
 
 --ForeignKey references

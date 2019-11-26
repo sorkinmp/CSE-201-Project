@@ -713,10 +713,11 @@ namespace StahrDBAPI {
         }
 
         [WebMethod]
-        public void addUser(string email, string passwd)
+        public void addUser(string email, string passwd, int admin)
         {
             addParam("@email", email);
             addParam("@passwd", passwd);
+            addParam("@admin", admin);
             send("addUser", serializeStyle.DATA_TABLE);
         }
 		#endregion

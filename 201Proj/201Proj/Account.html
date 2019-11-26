@@ -7,6 +7,7 @@
     <!--Import JQERY-->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="import" href="includes/head.html">
 
     <script type="text/javascript">
         // Need the class topnav to have these buttons if not logged in
@@ -14,7 +15,7 @@
         // <a href="signUp.html">Sign Up</a>
         // <a class="active" href="index.html">Home</a>
         // need to run when the page loads, right now need to reload the page
-        $(document).ready( ()=> {
+        $(document).ready(() => {
             // run the function
             checkParam();
         });
@@ -32,7 +33,7 @@
             // add username
             $("#username").html("Username: " + email);
         }
-        
+
 
 
         // the following functions were found at: https://html-online.com/articles/get-url-parameters-javascript/

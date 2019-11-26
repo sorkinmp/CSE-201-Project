@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--Import JQERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="import" href="includes/head.html">
     <title>SignUp Page</title>
     <script type="text/javascript">
         // need to check if user exists
@@ -21,16 +24,19 @@
                         $("#result").show();
                     } else {
                         // user does not exist, call addUser
+                        // any added users are NOT admins, so admin = false
+                        var admin = 0;
                         console.log(response);
-                        service("addUser", `{email: '${email}', passwd: '${passwd}'}`, (response) => {
+                        service("addUser", `{email: '${email}', passwd: '${passwd}', admin: '${admin}'}`, (response) => {
+                            console.log(response);
                             // with success, tell user
                             let msg = "Success! User " + email + " successfully added!";
                             $("#msg").html(msg);
                             $("#butt").html(`<a type="button" class="success" id="homeBut" href="index.html">Return to homepage</a>`);
                             $("#result").show();
                         }, (response) => {
-                                alert("addUser failure");
-                                console.log("addUser bad response:" + response);
+                            alert("addUser failure");
+                            console.log("addUser bad response:" + response);
                         }); // end service call for addUser
                     }  // closes the else option for adding user
                 }, (response) => {
