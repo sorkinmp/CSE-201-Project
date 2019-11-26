@@ -2,100 +2,151 @@
 <html lang="en">
 <head>
     <title>SignUp Page</title>
-<style>
-html{   
-    width: 100%;   
-    height: 100%;   
-    overflow: hidden;   
-    font-style: normal;   
-}   
-body{   
-    width: 100%;   
-    height: 100%;   
-    font-family: 'Open Sans',sans-serif;   
-    margin: 0;   
-    background-color: #99ccff;   
-}   
-#login{   
-    position: absolute;   
-    top: 50%;   
-    left:50%;   
-    margin: -150px 0 0 -150px;   
-    width: 300px;   
-    height: 300px;   
-}   
-#login h1{   
-    color: #fff;   
-    text-shadow:0 0 10px;   
-    letter-spacing: 1px;   
-    text-align: center;   
-}   
-h1{   
-    font-size: 2em;   
-    margin: 0.67em 0;   
-}   
-input{   
-    width: 278px;   
-    height: 18px;   
-    margin-bottom: 10px;   
-    outline: none;   
-    padding: 10px;   
-    font-size: 13px;   
-    color: #fff;   
-    text-shadow:1px 1px 1px;   
-    border-top: 1px solid #312E3D;   
-    border-left: 1px solid #312E3D;   
-    border-right: 1px solid #312E3D;   
-    border-bottom: 1px solid #56536A;   
-    border-radius: 4px;   
-    background-color: #2D2D3F;   
-}   
-.but{   
-    width: 300px;   
-    min-height: 20px;   
-    display: block;   
-    background-color: #4a77d4;   
-    border: 1px solid #3762bc;   
-    color: #fff;   
-    padding: 9px 14px;   
-    font-size: 15px;   
-    line-height: normal;   
-    border-radius: 5px;   
-    margin: 0;   
-}  
-.topnav {
-  overflow: hidden;
-  background-color: #e9e9e9;
-}
-.topnav a {
-  float: right;
-  display: block;
-  color: black;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
+    <script type="text/javascript">
+        // need to check if user exists
+        $(document).ready(function () {
+            // need to stop form from submitting
+            $("#signUp").submit(function (event) {
+                event.preventDefault();
+                // obtain variables
+                // example user: litleBrother@gmail.com passwd: 1990s
+                var email = document.getElementById("u").value;
+                var passwd = document.getElementById("p").value;
+                // call service funtion getUser to see if user exists
+                service("getUser", `{email: '${email}', passwd: '${passwd}'}`, (response) => {
+                    if (response.length > 0) {
+                        // user already exists!
+                        let msg = email + " Already exists! ";
+                        $("#msg").html(msg);
+                        $("#result").show();
+                    } else {
+                        // user does not exist, call addUser
+                        console.log(response);
+                        service("addUser", `{email: '${email}', passwd: '${passwd}'}`, (response) => {
+                            // with success, tell user
+                            let msg = "Success! User " + email + " successfully added!";
+                            $("#msg").html(msg);
+                            $("#butt").html(`<a type="button" class="success" id="homeBut" href="index.html">Return to homepage</a>`);
+                            $("#result").show();
+                        }, (response) => {
+                                alert("addUser failure");
+                                console.log("addUser bad response:" + response);
+                        }); // end service call for addUser
+                    }  // closes the else option for adding user
+                }, (response) => {
+                    alert("getUser failure");
+                    console.log("getUser bad response: " + response);
+                }); // end service call for getUser
+            }); // end submit event
+        }); // end document.ready
 
-</style>
+    </script>
+
+
+    <style>
+        html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-style: normal;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Open Sans',sans-serif;
+            margin: 0;
+            background-color: #99ccff;
+        }
+
+        #login {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -150px 0 0 -150px;
+            width: 300px;
+            height: 300px;
+        }
+
+            #login h1 {
+                color: #fff;
+                text-shadow: 0 0 10px;
+                letter-spacing: 1px;
+                text-align: center;
+            }
+
+        h1 {
+            font-size: 2em;
+            margin: 0.67em 0;
+        }
+
+        input {
+            width: 278px;
+            height: 18px;
+            margin-bottom: 10px;
+            outline: none;
+            padding: 10px;
+            font-size: 13px;
+            color: #fff;
+            text-shadow: 1px 1px 1px;
+            border-top: 1px solid #312E3D;
+            border-left: 1px solid #312E3D;
+            border-right: 1px solid #312E3D;
+            border-bottom: 1px solid #56536A;
+            border-radius: 4px;
+            background-color: #2D2D3F;
+        }
+
+        .but {
+            width: 300px;
+            min-height: 20px;
+            display: block;
+            background-color: #4a77d4;
+            border: 1px solid #3762bc;
+            color: #fff;
+            padding: 9px 14px;
+            font-size: 15px;
+            line-height: normal;
+            border-radius: 5px;
+            margin: 0;
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: #e9e9e9;
+        }
+
+            .topnav a {
+                float: right;
+                display: block;
+                color: black;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 17px;
+            }
+    </style>
 </head>
-<body>  
-<div class="topnav">
-  <a href="login.html">Login</a>
-  <a href="signUp.html">Sign Up</a>
-  <a class="active" href="index.html">Home</a>
+<body>
+    <div class="topnav">
+        <a href="login.html">Login</a>
+        <a class="active" href="index.html">Home</a>
 
-</div>
+    </div>
 
 
-    <div id="login">  
-        <h1>Sign up</h1>  
-        <form method="post">  
-            <input type="text" required="required" placeholder="Username" name="u">  
-            <input type="password" required="required" placeholder="Password" name="p">
-			<input type="password" required="required" placeholder="Repeat Password" name="pp">
-            <button class="but" type="submit">Sign Up</button>  
-        </form>  
-    </div>  
+    <div id="login">
+        <h1>Sign up</h1>
+        <form method="post" id="signUp">
+            <input type="text" required="required" placeholder="Username" name="u" id="u">
+            <input type="password" required="required" placeholder="Password" name="p" id="p">
+            <input type="password" required="required" placeholder="Repeat Password" name="pp" id="pp">
+            <button class="but" type="submit">Sign Up</button>
+        </form>
+    </div>
+    <div id="result" style="display: none;">
+        <p id="msg"></p>
+        <div id="butt"></div>
+    </div>
 </body>  
 </html>

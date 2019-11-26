@@ -31,9 +31,11 @@
 
                         $("#login").hide();
                     } else {
+                        // incorrect username or password
                         console.log(response);
                         let msg = "Incorrect username or password";
                         $("#msg").html(msg);
+                        $("#result").show();
                     }
                 }, (response) => {
                     alert("getUser failure");
@@ -132,7 +134,7 @@
     <div class="topnav">
         <a href="login.html">Login</a>
         <a href="signUp.html">Sign Up</a>
-        <a class="active" href="index.html">Home</a>
+        <a href="index.html">Home</a>
 
     </div>
 
