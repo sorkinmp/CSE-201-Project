@@ -126,10 +126,28 @@
 
     <h4 class="pos_right2" id="username" name="username">UserName:</h4>
 
-    <h4 class="pos_right2">List:</h4>
+    <!--<h4 class="pos_right2">List:</h4>-->
+    <!--<h4 class="pos_right2">Comment:</h4>-->
+    <!--pic, title, genre, releaseDate, developer, console, rating-->
+    <script type="text/javascript">
+        // need to prevent default and run a submit function 
 
-    <h4 class="pos_right2">Comment:</h4>
+    </script>
 
+
+    <div id="addGame">
+        <h1>Add a game</h1>
+        <form method="post" id="add">
+            <input type="text" required="required" placeholder="Picture" name="pic" id="pic">
+            <input type="text" required="required" placeholder="Title" name="title" id="title">
+            <input type="text" required="required" placeholder="Genre" name="genre" id="genre">
+            <input type="text" required="required" placeholder="ReleaseDate" name="rDate" id="rDate">
+            <input type="text" required="required" placeholder="Developer" name="dev" id="dev">
+            <input type="text" required="required" placeholder="Console" name="console" id="console">
+            <input type="text" required="required" placeholder="Rating" name="rating" id="rating">
+            <button class="btn-primary" type="submit">Add</button>
+        </form>
+    </div>
 
 
 </body>

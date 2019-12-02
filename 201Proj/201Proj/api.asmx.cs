@@ -720,7 +720,59 @@ namespace StahrDBAPI {
             addParam("@admin", admin);
             send("addUser", serializeStyle.DATA_TABLE);
         }
-		#endregion
 
-	}
+        [WebMethod]
+        public void getCommentsByGame(int gameId)
+        {
+            addParam("@gameId", gameId);
+            send("getCommentsByGame", serializeStyle.DATA_TABLE);
+        }
+
+        [WebMethod]
+        public void getGameByID(int gameId)
+        {
+            addParam("@gameId", gameId);
+            send("getGameByID", serializeStyle.DATA_TABLE);
+        }
+
+        [WebMethod]
+        public void addComment(int gameId, int userId, string comment)
+        {
+            addParam("@gameId", gameId);
+            addParam("@userId", userId);
+            addParam("@comment", comment);
+            send("addComment", serializeStyle.DATA_TABLE);
+        }
+
+        [WebMethod]
+        public void deleteComment(int commentId)
+        {
+            addParam("@commentId", commentId);
+            send("deleteComment", serializeStyle.DATA_TABLE);
+        }
+
+        [WebMethod]
+        public void deleteGame(int gameId)
+        {
+            addParam("@gameId", gameId);
+            send("deleteGame", serializeStyle.DATA_TABLE);
+        }
+
+        [WebMethod]
+        public void getUserId(int userId)
+        {
+            addParam("@userId", userId);
+            send("getUserId", serializeStyle.DATA_TABLE);
+        }
+
+        [WebMethod]
+        public void getCommentId(int commentId)
+        {
+            addParam("@commentId", commentId);
+            send("getCommentId", serializeStyle.DATA_TABLE);
+        }
+
+        #endregion
+
+    }
 }

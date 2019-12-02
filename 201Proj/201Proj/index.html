@@ -14,14 +14,13 @@
         // <a href="login.html">Login</a>
         // <a href="signUp.html">Sign Up</a>
         // <a class="active" href="index.html">Home</a>
-        // $(document).ready(() => {
         function checkParam() {
             // check if there is an email and admin in the url
             var email = getUrlParam('email', 'null');
             var admin = getUrlParam('admin', 'false');
             console.log("Email: " + email);
             console.log("Admin: " + admin);
-            // if there is then add the buttons
+            // if there isnt then add the buttons
             if (email == 'null' || admin == 'null') {
                 console.log("email: " + email);
                 console.log("admin: " + admin);
@@ -30,8 +29,8 @@
                 var home = "<a class='active' href='index.html'>Home</a>";
                 $(".topnav").html(login + signUp + home);
             } else {
-                console.log("emailR: " + email);
-                console.log("adminR: " + admin);
+                // console.log("emailR: " + email);
+                // console.log("adminR: " + admin);
                 // add the home, account, and a logout button
                 // var home2 = "<a class='active' href='index.html'>Home</a>";
                 var account = "<a href='Account.html?email=" + email + "&admin=" + admin + "'>Account Page</a>";
@@ -39,7 +38,6 @@
                 $(".topnav").html(account + logout);
             }
         }
-        // }); // end document.ready
 
 
         // the following functions were found at: https://html-online.com/articles/get-url-parameters-javascript/
@@ -64,6 +62,9 @@
             return urlparameter;
         }
         // end script for checking parameter
+        // check if user logged in
+
+
     </script>
 
 
@@ -230,7 +231,7 @@
             service("getAllGames", "{}", (response) => {
                 let tableBody = "";
                 $.each(response, (index, value) => {
-                    tableBody += "<tr><td style= 'width:200px'>" + "<img src= 'images/" + value.pic + "' alt= 'Game Image'"
+                    tableBody += "<tr data-id='" + value.gameId + "'><td style= 'width:200px'>" + "<img src= '" + value.pic + "' alt= 'Game Image'"
                         + "width=200px; height=200px;>" + "</td>" + "<td class= tableData>" + value.title + "</td>" +
                         "<td class= tableData>" + value.genre + "<td class= tableData>" + value.releaseDate + "</td>" +
                         "<td class= tableData>" + value.developer + "</td>" +
@@ -238,6 +239,7 @@
                         "<td class=tableData>" + value.rating + "</td></tr>";
                 });
                 $("#tableBody").html(tableBody);
+                $("tr").click(redirect);
             }, (response) => {
                 alert("Error on getAllGames");
                 console.log(response);
@@ -256,12 +258,12 @@
                     success: fn
                 });
             };
-            // call the function from the other file
+            // call the function from the other script
             checkParam();
         }); // end document.ready
         // write tests here
 
-        function CountRows() {
+        function countRows() {
             var totalRowCount = 0;
             var rowCount = 0;
             var table = document.getElementById("tableBody");
@@ -275,11 +277,11 @@
             var message = "Total Row Count: " + totalRowCount;
             message += "\nRow Count: " + rowCount;
             // $("#message").html(message);
-            alert(message);
+            //alert(message);
         }
 
         // run countRows every 5 seconds
-        setTimeout(CountRows, 5000);
+        setTimeout(countRows, 5000);
         // searchBar function
         function search() {
             // get data from searchbar
@@ -287,7 +289,7 @@
             service("getGameByTitle", `{data: '${data}'}`, (response) => {
                 let tableBody = "";
                 $.each(response, (index, value) => {
-                    tableBody += "<tr><td style= 'width:200px'>" + "<img src= 'images/" + value.pic + "' alt= 'Game Image'"
+                    tableBody += "<tr data-id='" + value.gameId + "'><td style= 'width:200px'>" + "<img src= '" + value.pic + "' alt= 'Game Image'"
                         + "width=200px; height=200px;>" + "</td>" + "<td class= tableData>" + value.title + "</td>" +
                         "<td class= tableData>" + value.genre + "<td class= tableData>" + value.releaseDate + "</td>" +
                         "<td class= tableData>" + value.developer + "</td>" +
@@ -295,6 +297,7 @@
                         "<td class=tableData>" + value.rating + "</td></tr>";
                 });
                 $("#tableBody").html(tableBody);
+                $("tr").click(redirect);
             }, (response) => {
                 alert("Error on getGameByTitle");
                 console.log(response);
@@ -302,8 +305,59 @@
             );
         } // end search() function
 
+
+        function redirect() {
+            // get the val/gameId from the game
+            var gameId = $(this).data('id');
+            // check if there is an email and admin in the url
+            var email = getUrlParam('email', 'null');
+            var admin = getUrlParam('admin', 'false');
+            // if there is null then this is only parameter
+            if (email == 'null' || admin == 'null') {
+                // this is only parameter
+                // send to "result.html?gameId=" + gameId
+                window.location = "result.html?gameId=" + gameId;
+            } else {
+                // add it to the end
+                window.location = "result.html?email=" + email + "&admin=" + admin + "&gameId=" + gameId;
+            }
+
+        } // end redirect function
+
     </script>
 
+    <style>
+        input {
+            width: 278px;
+            height: 50px;
+            margin-bottom: 10px;
+            outline: none;
+            padding: 10px;
+            font-size: 13px;
+            color: #fff;
+            text-shadow: 1px 1px 1px;
+            border-top: 1px solid #312E3D;
+            border-left: 1px solid #312E3D;
+            border-right: 1px solid #312E3D;
+            border-bottom: 1px solid #56536A;
+            border-radius: 4px;
+            background-color: #2D2D3F;
+        }
+
+        .but {
+            width: 300px;
+            min-height: 20px;
+            display: block;
+            background-color: #4a77d4;
+            border: 1px solid #3762bc;
+            color: #fff;
+            padding: 9px 14px;
+            font-size: 15px;
+            line-height: normal;
+            border-radius: 5px;
+            margin: 0;
+        }
+    </style>
 
 </body>
 </html>

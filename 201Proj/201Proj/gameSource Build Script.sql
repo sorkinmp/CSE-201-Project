@@ -47,17 +47,17 @@ GO
 -- INSERTS
 /*** Games Insert(building the entries in the table) ***/
 INSERT INTO Games(pic, title, genre, releaseDate, developer, console, rating) VALUES 
-('supmarbro1.jpg', 'Mario Bros', 'Platforming', 1983, 'Nintendo', 'NES', 7.5),
-('KirbyDreamLand.jpg', 'Kirbys Dream Land', 'Action, platformer', 1992, 'Nintendo', 'GBA', 9.5),
-('lol.jpg','League of Legends', 'MOBA', 2009, 'Riot Games', 'PC', 10),
-('animalCross.jpg','Animal Crossing: New Leaf', 'Social Simulation Game', 2012, 'Nintendo', 'Nintendo 3DS', 9.6),
-('PokemonXY.jpg','PokemonX/Y', 'Role-playing', 2013, 'Nintendo', '3DS', 9.9),
-('shovKnight.jpg','Shovel Knight', 'Platform Game', 2014, 'Nintendo', 'Nintendo 3DS', 9.8),
-('splatoon.jpg','Splatoon', 'Third-person shooter', 2015, 'Nintendo', 'Wii U', 9.3),
-('TheLegendOfZelda.jpg','The Legend Of Zelda: Breath of the Wild', 'Action-adventure', 2017, 'Nintendo', 'Nintendo Switch', 9.6),
-('letsgoPika.jpg','Pokemon: Lets Go, Pickachu!', 'Action role-playing', 2018, 'Nintendo', 'Nintendo Switch', 9.3),
-('marvUltAll3.jpg','Marvel Ultimate Alliance 3: The Black Order', 'Action role-playing', 2019, 'Nintendo', 'Nintendo Switch', 7.8),
-('pokeSwordShield.jpg','Pokemon Sword and Shield', 'Role-playing', 2019, 'Nintendo', 'Nintendo Switch', 9.0)
+('images/animalCross.jpg','Animal Crossing: New Leaf', 'Social Simulation Game', 2012, 'Nintendo', 'Nintendo 3DS', 9.6),
+('images/KirbyDreamLand.jpg', 'Kirbys Dream Land', 'Action, platformer', 1992, 'Nintendo', 'GBA', 9.5),
+('images/lol.jpg','League of Legends', 'MOBA', 2009, 'Riot Games', 'PC', 10),
+('images/supmarbro1.jpg', 'Mario Bros', 'Platforming', 1983, 'Nintendo', 'NES', 7.5),
+('images/marvUltAll3.jpg','Marvel Ultimate Alliance 3: The Black Order', 'Action role-playing', 2019, 'Nintendo', 'Nintendo Switch', 7.8),
+('images/pokeSwordShield.jpg','Pokemon Sword and Shield', 'Role-playing', 2019, 'Nintendo', 'Nintendo Switch', 9.0),
+('images/letsgoPika.jpg','Pokemon: Lets Go, Pickachu!', 'Action role-playing', 2018, 'Nintendo', 'Nintendo Switch', 9.3),
+('images/PokemonXY.jpg','PokemonX/Y', 'Role-playing', 2013, 'Nintendo', '3DS', 9.9),
+('images/shovKnight.jpg','Shovel Knight', 'Platform Game', 2014, 'Nintendo', 'Nintendo 3DS', 9.8),
+('images/splatoon.jpg','Splatoon', 'Third-person shooter', 2015, 'Nintendo', 'Wii U', 9.3),
+('images/TheLegendOfZelda.jpg','The Legend Of Zelda: Breath of the Wild', 'Action-adventure', 2017, 'Nintendo', 'Nintendo Switch', 9.6)
 GO
 
 /***  Users Insert ***/
@@ -71,7 +71,7 @@ GO
 -- second #: references the userId in table (Users)
 INSERT INTO Comments(gameId, userId, comment) VALUES
 (1, 1, 'Worst game ever'),
-(6, 2, 'PLayed it all night long')
+(6, 2, 'Played it all night long')
 GO
 
 /*** Game info stored: title, genre,
@@ -82,7 +82,7 @@ game rating (by major groups), comments ***/
 
 /*** Procedure: getGameByTitle ***/
 CREATE PROCEDURE getGameByTitle
-	@title	VARCHAR(30)
+	@title	VARCHAR(50)
 
 AS
 	SELECT * FROM Games
@@ -90,10 +90,18 @@ AS
 	ORDER BY title
 GO
 
+CREATE PROCEDURE getGameByID
+	@gameId INT
+AS
+	SELECT * FROM Games
+	WHERE gameId = @gameId
+GO
+
+
 CREATE PROCEDURE getCommentsByGame
 	@gameId	INT
 AS
-	SELECT * FROM Games
+	SELECT * FROM Comments
 	WHERE gameId = @gameId
 GO
 
@@ -105,23 +113,41 @@ GO
 
 --pic, title, genre, releaseDate, developer, console, rating
 CREATE PROCEDURE addGame
-	@pic			VARCHAR(30),
-	@title			VARCHAR(30),
-	@genre			VARCHAR(30),
+	@pic			VARCHAR(50),
+	@title			VARCHAR(50),
+	@genre			VARCHAR(50),
 	@releaseDate	INT,
-	@developer		VARCHAR(30),
-	@console		VARCHAR(30),
+	@developer		VARCHAR(50),
+	@console		VARCHAR(50),
 	@rating			FLOAT
 AS
 	INSERT INTO Games(pic, title, genre, releaseDate, developer, console, rating) VALUES
 	(@pic, @title, @genre, @releaseDate, @developer, @console, @rating)
 GO
 
+CREATE PROCEDURE addComment
+	@gameId INT,
+	@userId INT,
+	@comment VARCHAR(50)
+AS
+	INSERT INTO Comments(gameId, userId, comment) VALUES
+	(@gameId, @userId, @comment)
+GO
+
+
 CREATE PROCEDURE deleteGame
 	@gameId			INT
 AS
 	DELETE FROM Games
 	WHERE gameId = @gameId
+GO
+
+-- delete comment commentId?
+CREATE PROCEDURE deleteComment
+	@commentId		INT
+AS
+	DELETE FROM Comments
+	WHERE commentId = @commentId
 GO
 
 /**need to get the user and check if user in table, and if password and user match**/
@@ -136,12 +162,30 @@ GO
 -- Need to add user
 CREATE PROCEDURE addUser
 	@email VARCHAR(50),
-	@passwd VARCHAR(50),
+	@passwd VARCHAR(255),
 	@admin BIT
 AS
 	INSERT INTO Users(email, passwd, admin) VALUES
 	(@email, @passwd, @admin)
 GO
+
+-- need to get userId
+CREATE PROCEDURE getUserId
+	@email VARCHAR(50)
+AS
+	SELECT gameId FROM Users
+	WHERE email = @email
+GO
+
+-- need to get commentId
+CREATE PROCEDURE getCommentId
+	@comment VARCHAR(50)
+AS
+	SELECT commentId FROM Comments
+	WHERE comment = @comment
+GO
+
+
 
 --ForeignKey references
 
@@ -183,3 +227,10 @@ GO
 --go
 
 -- EXEC getUser 'littleBrother@gmail.com', '1990s'
+
+--drop database gameSource
+
+--USE master;
+--GO
+--ALTER DATABASE gameSource SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+--GO

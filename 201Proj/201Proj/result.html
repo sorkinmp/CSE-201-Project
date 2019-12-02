@@ -8,8 +8,182 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link rel="import" href="includes/head.html">
     <title>FinDr Application</title>
-    <style>
+    <script type="text/javascript">
+        // Need the class topnav to have these buttons if not logged in
+        // <a href="login.html">Login</a>
+        // <a href="signUp.html">Sign Up</a>
+        // <a class="active" href="index.html">Home</a>
+        function checkParam() {
+            // check if there is an email and admin in the url
+            var email = getUrlParam('email', 'null');
+            var admin = getUrlParam('admin', 'false');
+            // console.log("Email: " + email);
+            // console.log("Admin: " + admin);
+            // if there isnt then add the buttons
+            if (email == 'null' || admin == 'null') {
+                console.log("email: " + email);
+                console.log("admin: " + admin);
+                var login = "<a href='login.html'>Login</a>";
+                var signUp = "<a href='signUp.html'>Sign Up</a>";
+                var home = "<a class='active' href='index.html'>Home</a>";
+                $(".topnav").html(login + signUp + home);
+                // hide the add comment div id=addCom
+                $('#addCom').hide();
+            } else {
+                // add the account, and a logout button
+                var account = "<a href='Account.html?email=" + email + "&admin=" + admin + "'>Account Page</a>";
+                var logout = "<a href='index.html'>Logout</a>";
+                $(".topnav").html(account + logout);
+                // show the add comment div id=addCom
+                $('#addCom').show();
+                console.log("passed");
+            }
+        }
 
+        // the following functions were found at: https://html-online.com/articles/get-url-parameters-javascript/
+        // gets the different variables separated by '&' in the URL
+        // example use: var number = getUrlVars()["x"];
+        function getUrlVars() {
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+                vars[key] = value;
+            });
+            return vars;
+        }
+
+        // allows a default value to be set, if the parameter exists then the value will be
+        // changed to that, otherwise the defaut value will be returned
+        // example use: var mytext = getUrlParam('text','Empty');
+        function getUrlParam(parameter, defaultvalue) {
+            var urlparameter = defaultvalue;
+            if (window.location.href.indexOf(parameter) > -1) {
+                urlparameter = getUrlVars()[parameter];
+            }
+            return urlparameter;
+        }
+        // end script for checking parameter
+
+        function checkId() {
+            // check the gameId
+            var gameId = getUrlParam('gameId', -1);
+            if (gameId == -1) {
+                alert("Invalid gameId on checkId function");
+                console.log(gameId);
+            } else {
+                // make a service call to get the id
+                service("getGameByID", `{gameId: '${gameId}'}`, (response) => {
+                    let tableBody = "";
+                    $.each(response, (index, value) => {
+                        tableBody += "<tr data-id='" + value.gameId + "'><td style= 'width:200px'>" + "<img src= '" + value.pic + "' alt= 'Game Image'"
+                            + "width=200px; height=200px;>" + "</td>" + "<td class= tableData>" + value.title + "</td>" +
+                            "<td class= tableData>" + value.genre + "<td class= tableData>" + value.releaseDate + "</td>" +
+                            "<td class= tableData>" + value.developer + "</td>" +
+                            "<td class= tableData>" + value.console + "</td>" +
+                            "<td class=tableData>" + value.rating + "</td></tr>";
+                    });
+                    $("#tableBody").html(tableBody);
+                }, (response) => {
+                    alert("Error on getGameByID");
+                    console.log(response);
+                });
+                // make another service call to display the comments
+                // div id=commDiv ul id=commList
+                service("getCommentsByGame", `{gameId: '${gameId}'}`, (response) => {
+                    let comments = "";
+                    $.each(response, (index, value) => {
+                        comments += "<tr><td>" + value.comment + "<td><button class=deleteButton></button></td></tr>";
+                    });
+                    $("#tableBody2").html(comments);
+                }, (response) => {
+                    alert("Error on getCommentsByGame");
+                    console.log(response);
+                });
+            }
+        } // end checkId function
+
+        // function to add comment to game
+        // needs to add: gameId, userId, comment
+        // how to get userId?
+        function add() {
+            // get gameId
+            var gameId = getUrlParam('gameId', -1);
+            if (gameId == -1) {
+                alert("Invalid gameId on add function");
+                console.log(gameId);
+            } else {
+                // get the comment entered by the user in the form
+                // form id=commForm text id=comment
+                var comment = document.getElementById("comment").value;
+                var email = getUrlParam('email', 'null');
+                var userId = -1;
+                // need to get userId from Users table
+                // make service call
+                service("getUserId", `{email: '${email}'}`, (response) => {
+                    // only one value should be returned
+                    userId = response.userId;
+                    console.log("userId: " + userId);
+                }, (response) => {
+                    alert("Error on getUserId");
+                    console.log(response);
+                });
+                // now we have gameId, userId, comment
+                // call the service function
+                service("addComment", `{gameId: '${gameId}', userId: '${userId}', comment: '${comment}'}`, (response) => {
+                    // success means no response
+                    console.log("success: " + response);
+                    let msg = "Success! Comment added! If it was bad the admin will remove it";
+                    $("#msg").html(msg);
+                    $("#result").show();
+                    // hide form
+                    $("#addCom").hide();
+                }, (response) => {
+                    alert("addComment failure");
+                    console.log(response);
+                }); // close the service call for add Comment
+            } // end the else
+        }  // end the function
+
+        // this should delete the comment if the admin clicks on it
+        function checkAdmin() {
+            // get the admin parameter
+            var admin = getUrlParam('admin', 'false');
+            if (admin == 'null') {
+                // do nothing
+            } else {
+                if (admin == true) {
+                    // need to add delete option to all comments when clicked?
+                
+                }
+            } // end else
+
+        } // end checkAdmin
+
+        $(document).ready(function () {
+            // need to checkParam, if user logged in show addComm
+            checkParam();
+            // need to run method to check if valid gameId
+            // function will also load all current comments
+            checkId();
+            // add the delete option to click comments if admin
+            // checkAdmin();
+
+            // need to check submit of comment form id=commForm
+            $("#commForm").submit((event) => {
+                event.preventDefault();
+                add();
+            });
+
+            // ajax method just in case
+            function ajax(method, fn) {
+                $.ajax({
+                    type: 'GET',
+                    url: 'api.asmx/' + method,
+                    success: fn
+                });
+            };
+        });
+    </script>
+    <style>
         * {
             box-sizing: border-box;
         }
@@ -49,7 +223,7 @@
         }
 
         button {
-            height: 30px;
+            height: 42px;
             width: 42px;
             cursor: pointer;
             position: absolute;
@@ -59,7 +233,6 @@
         /*search Bar*/
         .search {
             background: #ffffff;
-            
         }
 
             .search form {
@@ -68,7 +241,6 @@
 
             .search input {
                 width: 300px;
-                height: 30px;
                 border-radius: 42px;
                 border: 2px solid #324B4E;
                 background: #F9F0DA;
@@ -94,16 +266,18 @@
 
         /*center*/
         .center {
-            height: 50px;
+            height: 300px;
             position: relative;
         }
 
             .center p {
                 margin: 0;
                 position: absolute;
-                top: 40%;
-                left: 32%;
-                font-size: 1.8em;
+                top: 80%;
+                left: 50%;
+                -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+                font-size: 3.5em;
                 color: rgb(0, 128, 255);
             }
 
@@ -127,7 +301,6 @@
             width: 100px;
             height: 100px;
         }
-        
     </style>
 </head>
 
@@ -141,28 +314,57 @@
 
     <div class="center">
         <p>FinDr</p>
-
-        <div class="result">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <!--pic, title, genre, releaseDate, developer, console, rating (comments?)-->
-                        <th scope="col">Game Picture</th>
-                        <th scope="col">Game Title</th>
-                        <th scope="col">Genre</th>
-                        <th scope="col">Release Date</th>
-                        <th scope="col">Developer</th>
-                        <th scope="col">Example Console</th>
-                        <th scope="col">Rating</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody">
-                </tbody>
-            </table>
-        </div>
-
     </div>
-    
-  
+
+    <div class="result">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <!--pic, title, genre, releaseDate, developer, console, rating (comments?)-->
+                    <th scope="col">Game Picture</th>
+                    <th scope="col">Game Title</th>
+                    <th scope="col">Genre</th>
+                    <th scope="col">Release Date</th>
+                    <th scope="col">Developer</th>
+                    <th scope="col">Example Console</th>
+                    <th scope="col">Rating</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+            </tbody>
+        </table>
+    </div>
+
+    <div id="commDiv">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Comment</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody2">
+            </tbody>
+        </table>
+    </div>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <div id="addComm" style="display:none;">
+        <h1 style="text-align:center;">Add a comment</h1>
+        <form method="post" id="commForm">
+            <!--need to add the gameId to the form submission, along with userid-->
+            <input type="text" required placeholder="Comment" id="comment">
+            <button class="but" type="submit">Add</button>
+        </form>
+    </div>
+
+    <div id="result" style="display:none;">
+        <p id="msg"></p>
+    </div>
 </body>
 </html>
