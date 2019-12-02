@@ -5,11 +5,14 @@
 <head>
 
     <!--Import JQERY-->
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!--Bootrap and Bootstrap JS-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link rel="import" href="includes/head.html">
 
     <script type="text/javascript">
+
         // Need the class topnav to have these buttons if not logged in
         // <a href="login.html">Login</a>
         // <a href="signUp.html">Sign Up</a>
@@ -18,14 +21,77 @@
         $(document).ready(() => {
             // run the function
             checkParam();
-        });
+            // prevent the default submit, div id=addGame, form id=addForm
+            $("#addForm").submit((event) => {
+                event.preventDefault();
+                console.log("submitted");
+                add();
+            });
+
+            //// ajax method just in case
+            //function ajax(method, fn) {
+            //    $.ajax({
+            //        type: 'GET',
+            //        url: 'api.asmx/' + method,
+            //        success: fn
+            //    });
+            //}; // end ajax
+        }); // end document.ready
+
+        function add() {
+            // can only add if logged in
+            // but should not be able to access page?
+            var email = getUrlParam('email', 'null');
+            // var admin = getUrlParam('admin', 'false');
+
+            if (email != 'null') {
+                // get all of the inputted data
+                var pic = $("#pic").val();
+                console.log(pic);
+                var title = $("#title").val();
+                console.log(title);
+                var genre = $("#genre").val();
+                console.log(genre);
+                var releaseDate = parseInt($("#rDate").val());
+                console.log(releaseDate);
+                var developer = $("#dev").val();
+                console.log(developer);
+                var gameConsole = $("#console").val();
+                console.log(gameConsole);
+                var rating = parseFloat($("#rating").val());
+                console.log(rating);
+                // must make the service call addGame
+                // validate input? assume input good, label for user
+                // `{gameId: '${gameId}', userId: '${userId}', comment: '${comment}'}`
+                service("addGame", `{pic: '${pic}', title: '${title}', genre: '${genre}', releaseDate: '${releaseDate}', developer: '${developer}', console: '${gameConsole}', rating: '${rating}'  }`, (response) => {
+                    // success means no response
+                    console.log("addGame success: " + response);
+                    // div id=addGameResult p id=msg
+                    let msg = "Success! Game added, admin may remove if they want to";
+                    $("#msg").html(msg);
+                    $("#addGameResult").show();
+                    $("#addForm")[0].reset();
+                }, (response) => {
+                    alert("Error on addGame");
+                    // console.log(response);
+                    $("#msg").html(response);
+                    $("#addGameResult").show();
+                }); // end service call for addGame
+            } else {
+                // if somehow they got to page without being logged in
+                // send them back to homepage
+                window.location = "index.html";
+            }
+        }  // end the function
+
 
         function checkParam() {
             // check if there is an email and admin in the url
+            // there will be as there is no other way to access page
             var email = getUrlParam('email', 'null');
             var admin = getUrlParam('admin', 'false');
-            console.log("Email: " + email);
-            console.log("Admin: " + admin);
+            //console.log("Email: " + email);
+            // console.log("Admin: " + admin);
             // add the home and a logout button
             var home2 = "<a href='index.html?email=" + email + "&admin=" + admin + "'>Home</a>";
             var logout = "<a href='index.html'>Logout</a>";
@@ -57,8 +123,8 @@
             }
             return urlparameter;
         }
-        // run the script when the page loads
-        window.onload = checkParam();
+                // run the script when the page loads
+                //window.onload = checkParam();
     </script>
 
 
@@ -124,29 +190,43 @@
 
     <h1 class="a"> FinDr</h1>
 
-    <h4 class="pos_right2" id="username" name="username">UserName:</h4>
+    <h4 class="pos_right2" id="username">UserName:</h4>
 
     <!--<h4 class="pos_right2">List:</h4>-->
     <!--<h4 class="pos_right2">Comment:</h4>-->
     <!--pic, title, genre, releaseDate, developer, console, rating-->
-    <script type="text/javascript">
-        // need to prevent default and run a submit function 
-
-    </script>
 
 
     <div id="addGame">
         <h1>Add a game</h1>
-        <form method="post" id="add">
-            <input type="text" required="required" placeholder="Picture" name="pic" id="pic">
-            <input type="text" required="required" placeholder="Title" name="title" id="title">
-            <input type="text" required="required" placeholder="Genre" name="genre" id="genre">
-            <input type="text" required="required" placeholder="ReleaseDate" name="rDate" id="rDate">
-            <input type="text" required="required" placeholder="Developer" name="dev" id="dev">
-            <input type="text" required="required" placeholder="Console" name="console" id="console">
-            <input type="text" required="required" placeholder="Rating" name="rating" id="rating">
+        <form id="addForm">
+            <label for="pic">Picture of game</label>
+            <input type="text" required placeholder="Picture" id="pic" />
+            <br />
+            <label for="title">Title</label>
+            <input type="text" required placeholder="Title" id="title" />
+            <br />
+            <label for="genre">Genre</label>
+            <input type="text" required placeholder="Genre" id="genre" />
+            <br />
+            <label for="rDate">Release Date</label>
+            <input type="text" required placeholder="ReleaseDate" id="rDate" />
+            <br />
+            <label for="dev">Developer</label>
+            <input type="text" required placeholder="Developer" id="dev" />
+            <br />
+            <label for="console">Console</label>
+            <input type="text" required placeholder="Console" id="console" />
+            <br />
+            <label for="rating">Rating</label>
+            <input type="text" required placeholder="Rating" id="rating" />
+            <br />
             <button class="btn-primary" type="submit">Add</button>
         </form>
+    </div>
+
+    <div id="addGameResult" style="display:none;">
+        <p id="msg"></p>
     </div>
 
 

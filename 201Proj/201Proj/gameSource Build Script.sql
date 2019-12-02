@@ -173,7 +173,7 @@ GO
 CREATE PROCEDURE getUserId
 	@email VARCHAR(50)
 AS
-	SELECT gameId FROM Users
+	SELECT userId FROM Users
 	WHERE email = @email
 GO
 

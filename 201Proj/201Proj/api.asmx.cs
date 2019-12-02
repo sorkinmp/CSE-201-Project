@@ -736,6 +736,19 @@ namespace StahrDBAPI {
         }
 
         [WebMethod]
+        public void addGame(string pic, string title, string genre, int releaseDate, string developer, string console, float rating)
+        {
+            addParam("@pic", pic);
+            addParam("@title", title);
+            addParam("@genre", genre);
+            addParam("@releaseDate", releaseDate);
+            addParam("@developer", developer);
+            addParam("@console", console);
+            addParam("@rating", rating);
+            send("addGame", serializeStyle.DATA_TABLE);
+        }
+
+        [WebMethod]
         public void addComment(int gameId, int userId, string comment)
         {
             addParam("@gameId", gameId);
@@ -759,9 +772,9 @@ namespace StahrDBAPI {
         }
 
         [WebMethod]
-        public void getUserId(int userId)
+        public void getUserId(string email)
         {
-            addParam("@userId", userId);
+            addParam("@email", email);
             send("getUserId", serializeStyle.DATA_TABLE);
         }
 
