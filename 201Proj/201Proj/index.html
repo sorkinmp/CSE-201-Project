@@ -28,6 +28,7 @@
                 var signUp = "<a href='signUp.html'>Sign Up</a>";
                 var home = "<a class='active' href='index.html'>Home</a>";
                 $(".topnav").html(login + signUp + home);
+                $("#userLog").hide(); // hide the div
             } else {
                 // console.log("emailR: " + email);
                 // console.log("adminR: " + admin);
@@ -36,6 +37,8 @@
                 var account = "<a href='Account.html?email=" + email + "&admin=" + admin + "'>Account Page</a>";
                 var logout = "<a href='index.html'>Logout</a>";
                 $(".topnav").html(account + logout);
+                $("#user").html("Welcome back " + email);
+                $("#userLog").show();
             }
         }
 
@@ -197,6 +200,15 @@
         <a class='active' href='index.html'>Home</a>
     </div>
 
+    <div class="userManual">
+        <a href="https://docs.google.com/a/miamioh.edu/document/d/1kgXunGVW2xBA3rGP70Z8d8Dd31nHxCSYw3KMykWH0Dg/edit?usp=sharing">User Manual</a>
+    </div>
+
+
+    <div id="userLog" style="display:none;">
+        <p id="user"></p>
+    </div>
+
     <div class="center">
         <p>FinDr</p>
     </div>
@@ -334,7 +346,7 @@
             outline: none;
             padding: 10px;
             font-size: 13px;
-            color: #fff;
+            color: black;
             text-shadow: 1px 1px 1px;
             border-top: 1px solid #312E3D;
             border-left: 1px solid #312E3D;
